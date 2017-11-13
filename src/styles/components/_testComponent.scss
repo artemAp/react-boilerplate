@@ -1,0 +1,27 @@
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("#{$img-path}wrapper_bg.jpg") no-repeat 50% 50%;
+  background-size: cover;
+  text-align: center;
+}
+
+.title {
+  color: #00d8ff;
+  font: 70px $font-Test;
+  text-transform: uppercase;
+  margin: 50px 0 0;
+  text-shadow: 0 0 10px #fff;
+}
+
+.logo {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.desc {
+  color: #c72429;
+  font-size: 40px;
+}
