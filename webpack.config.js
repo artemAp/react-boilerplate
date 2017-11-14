@@ -119,6 +119,13 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    contentBase: path.join(__dirname, '/'),
+    compress: true,
+    port: 3000,
+    hot: true,
+    open: true
+  },
   plugins: [
     new ExtractTextPlugin('[name]'),
     new BrowserSyncPlugin({
