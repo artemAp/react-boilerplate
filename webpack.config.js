@@ -66,7 +66,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(woff2?)$/i,
+        test: /\.(woff2?)$/i, // load fonts
         use: [
           {
             loader: 'file-loader',
@@ -79,7 +79,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(gif|png|jpe?g|svg)$/i,  // load images
         use: [
           {
             loader: 'file-loader',
@@ -113,12 +113,25 @@ module.exports = {
           // },
         ],
       },
+      {
+        test: /\.(mp3|wav|ogg|webm|mp4)$/i, // load media
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'media/',
+              name: '[name].[ext]',
+              useRelativePath: true,
+            },
+          },
+        ],
+      },
     ],
   },
   devServer: {
     contentBase: path.join(__dirname, '/'),
     compress: true,
-    port: 8080,
+    port: 3000,
     hot: true,
     open: true
   },
@@ -132,12 +145,28 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './index.html'),
     }),
-    // new BrowserSyncPlugin({
-    //   host: 'localhost',
-    //   port: 3000,
-    //   server: {
-    //     baseDir: '',
-    //   },
-    // }),
   ],
 };
+
+// {
+//   loader: 'image-webpack-loader',
+//   options: {
+//     gifsicle: {
+//       interlaced: false,
+//     },
+//     optipng: {
+//       optimizationLevel: 7,
+//     },
+//     pngquant: {
+//       quality: '80-90',
+//       speed: 4,
+//     },
+//     mozjpeg: {
+//       progressive: true,
+//       quality: 80,
+//     },
+//     webp: {
+//       quality: 75,
+//     },
+//   },
+// },
