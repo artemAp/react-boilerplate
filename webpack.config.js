@@ -89,28 +89,6 @@ module.exports = {
               useRelativePath: true,
             },
           },
-          // {
-          //   loader: 'image-webpack-loader',
-          //   options: {
-          //     gifsicle: {
-          //       interlaced: false,
-          //     },
-          //     optipng: {
-          //       optimizationLevel: 7,
-          //     },
-          //     pngquant: {
-          //       quality: '80-90',
-          //       speed: 4,
-          //     },
-          //     mozjpeg: {
-          //       progressive: true,
-          //       quality: 80,
-          //     },
-          //     webp: {
-          //       quality: 75,
-          //     },
-          //   },
-          // },
         ],
       },
       {
@@ -131,7 +109,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, '/'),
     compress: true,
-    port: 3000,
+    port: 8081,
     hot: true,
     open: true
   },
@@ -147,26 +125,3 @@ module.exports = {
     }),
   ],
 };
-
-// {
-//   loader: 'image-webpack-loader',
-//   options: {
-//     gifsicle: {
-//       interlaced: false,
-//     },
-//     optipng: {
-//       optimizationLevel: 7,
-//     },
-//     pngquant: {
-//       quality: '80-90',
-//       speed: 4,
-//     },
-//     mozjpeg: {
-//       progressive: true,
-//       quality: 80,
-//     },
-//     webp: {
-//       quality: 75,
-//     },
-//   },
-// },
