@@ -72,8 +72,9 @@ module.exports = {
             loader: 'file-loader',
             options: {
               outputPath: 'fonts/',
-              name: '[name].[ext]',
-              useRelativePath: true,
+              name(fileUrl) {
+                return toCorrectPath(fileUrl, 'fonts');
+              },
             },
           },
         ],
@@ -85,8 +86,9 @@ module.exports = {
             loader: 'file-loader',
             options: {
               outputPath: 'images/',
-              name: '[name].[ext]',
-              useRelativePath: true,
+              name(fileUrl) {
+                return toCorrectPath(fileUrl, 'images');
+              },
             },
           },
         ],
@@ -98,8 +100,9 @@ module.exports = {
             loader: 'file-loader',
             options: {
               outputPath: 'media/',
-              name: '[name].[ext]',
-              useRelativePath: true,
+              name(fileUrl) {
+                return toCorrectPath(fileUrl, 'media');
+              },
             },
           },
         ],
@@ -129,3 +132,9 @@ module.exports = {
     }),
   ],
 };
+
+function toCorrectPath(fileUrl, currentDir) {
+  const posixFormat = fileUrl.replace(new RegExp('\\' + path.sep, 'g'), '/');
+  const urlPath = posixFormat.split(`src/${currentDir}/`);
+  return (urlPath[1] && urlPath[1].length) ? urlPath[1] : '[name].[ext]';
+}

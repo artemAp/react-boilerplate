@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #D1EDFF;
+  background: #D1EDFF url("#{$img-path}/testDirectory/testImg.png") no-repeat;
   background-size: cover;
   text-align: center;
 }
