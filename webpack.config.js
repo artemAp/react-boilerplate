@@ -54,7 +54,7 @@ module.exports = {
               },
             },
           ],
-
+          
         })),
       },
       {
@@ -92,7 +92,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(mp3|wav|ogg|webm|mp4)$/i, // load media
+        test: /\.(mp3|wav|ogg|webm|mp4|pdf)$/i, // load media
         use: [
           {
             loader: 'file-loader',
@@ -109,9 +109,13 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, '/'),
     compress: true,
-    port: 8081,
+    port: 8080,
     hot: true,
-    open: true
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: false
+    },
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
