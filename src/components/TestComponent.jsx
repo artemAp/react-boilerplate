@@ -1,4 +1,5 @@
 import React from 'react';
+import TestSprite from './TestSprite';
 
 import Logo from '../images/logo.svg';
 
@@ -8,6 +9,7 @@ function TestComponent() {
       <div>
         <img className="logo" src={Logo} alt="" />
         <h1 className="title">coming soon</h1>
+        <TestSprite />
       </div>
     </div>
   );
