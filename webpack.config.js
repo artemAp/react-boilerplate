@@ -11,15 +11,14 @@ module.exports = {
     ignored: /node_modules/,
   },
   entry: {
-    'js/bundle': [
+    bundle: [
       'babel-polyfill',
       'react-hot-loader/patch',
       path.resolve(__dirname, './src/index.jsx'),
     ],
-    'css/main.css': './src/styles/main.scss',
   },
   output: {
-    filename: '[name].js',
+    filename: 'assets/js/[name].js',
     path: path.resolve(__dirname, './public'),
     publicPath: '/',
   },
@@ -38,7 +37,6 @@ module.exports = {
               loader: 'css-loader',
               options: {
                 sourceMap: true,
-                // minimize: true,
               },
             },
             {
@@ -66,42 +64,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.(woff2?)$/i, // load fonts
+        test: /\.(gif|png|jpe?g|svg|woff2?|mp3|wav|ogg|webm|mp4|pdf)$/i,
         use: [
           {
             loader: 'file-loader',
             options: {
-              outputPath: 'fonts/',
+              outputPath: 'assets/',
               name(fileUrl) {
-                return toCorrectPath(fileUrl, 'fonts');
-              },
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i,  // load images
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'images/',
-              name(fileUrl) {
-                return toCorrectPath(fileUrl, 'images');
-              },
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(mp3|wav|ogg|webm|mp4|pdf)$/i, // load media
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'media/',
-              name(fileUrl) {
-                return toCorrectPath(fileUrl, 'media');
+                return toCorrectPath(fileUrl);
               },
             },
           },
@@ -112,7 +82,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, '/'),
     compress: true,
-    port: 8080,
+    port: 3000,
     hot: true,
     open: true,
     overlay: {
@@ -124,8 +94,10 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    
-    new ExtractTextPlugin('[name]'),
+  
+    new ExtractTextPlugin({
+      filename: 'assets/css/main.css',
+    }),
     
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './index.html'),
@@ -133,8 +105,8 @@ module.exports = {
   ],
 };
 
-function toCorrectPath(fileUrl, currentDir) {
+function toCorrectPath(fileUrl) {
   const posixFormat = fileUrl.replace(new RegExp('\\' + path.sep, 'g'), '/');
-  const urlPath = posixFormat.split(`src/${currentDir}/`);
-  return (urlPath[1] && urlPath[1].length) ? urlPath[1] : '[name].[ext]';
+  const urlPath = posixFormat.split(`src/`);
+  return (urlPath[1] && urlPath[1].length) ? `${urlPath[1]}?[hash]` : '[name].[ext]?[hash]';
 }
