@@ -79,6 +79,24 @@ module.exports = {
               },
             },
           },
+          {
+            loader: 'image-webpack-loader',
+            query: {
+              mozjpeg: {
+                progressive: true,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              optipng: {
+                optimizationLevel: 4,
+              },
+              pngquant: {
+                quality: '75-90',
+                speed: 3,
+              },
+            },
+          },
         ],
       },
       {
@@ -107,12 +125,15 @@ module.exports = {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
-    
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false,
+      },
+    }),
     new ExtractTextPlugin({
       filename: 'assets/css/main.css',
     }),
-    
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './index.html'),
     }),
