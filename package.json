@@ -62,7 +62,7 @@
     "start": "npm-run-all dev",
     "clean": "rimraf dist/*",
     "dev": "webpack-dev-server",
-    "prod": "webpack",
+    "prod": "webpack --config=production.config.js",
     "server": "node server"
   },
   "repository": {
