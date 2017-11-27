@@ -119,6 +119,11 @@ module.exports = {
         include: path.resolve(__dirname, './src/images/icons'),
         options: {
           name: 'assets/images/svg-sprite.svg',
+          svgoOptions: {
+            plugins: [
+              {removeUselessStrokeAndFill: true},
+            ],
+          }
         },
       },
     ],
@@ -130,6 +135,11 @@ module.exports = {
       output: {
         comments: false,
       },
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      }
     }),
     new ExtractTextPlugin({
       filename: 'assets/css/main.css',
